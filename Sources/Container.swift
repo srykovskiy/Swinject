@@ -29,6 +29,7 @@ public final class Container {
     fileprivate var resolutionDepth = 0
     fileprivate let debugHelper: DebugHelper
     fileprivate let defaultObjectScope: ObjectScope
+    fileprivate let threadSafeResolutionEnabled: Bool
     internal var currentObjectGraph: GraphIdentifier?
     internal let lock: SpinLock // Used by SynchronizedResolver.
     internal var behaviors = [Behavior]()
@@ -36,11 +37,13 @@ public final class Container {
     internal init(
         parent: Container? = nil,
         debugHelper: DebugHelper,
-        defaultObjectScope: ObjectScope = .graph) {
+        defaultObjectScope: ObjectScope = .graph,
+        threadSafeResolutionEnabled: Bool = false) {
         self.parent = parent
         self.debugHelper = debugHelper
         self.lock = parent.map { $0.lock } ?? SpinLock()
         self.defaultObjectScope = defaultObjectScope
+        self.threadSafeResolutionEnabled = threadSafeResolutionEnabled
     }
 
     /// Instantiates a `Container`
@@ -56,10 +59,11 @@ public final class Container {
     public convenience init(
         parent: Container? = nil,
         defaultObjectScope: ObjectScope = .graph,
+        threadSafeResolutionEnabled: Bool = false,
         behaviors: [Behavior] = [],
         registeringClosure: (Container) -> Void = { _ in }
     ) {
-        self.init(parent: parent, debugHelper: LoggingDebugHelper(), defaultObjectScope: defaultObjectScope)
+        self.init(parent: parent, debugHelper: LoggingDebugHelper(), defaultObjectScope: defaultObjectScope, threadSafeResolutionEnabled: threadSafeResolutionEnabled)
         behaviors.forEach(addBehavior)
         registeringClosure(self)
     }
@@ -188,20 +192,28 @@ extension Container: _Resolver {
         var resolvedInstance: Service?
         let key = ServiceKey(serviceType: Service.self, argumentsType: Arguments.self, name: name, option: option)
 
-        if let entry = getEntry(for: key) {
-            resolvedInstance = resolve(entry: entry, invoker: invoker)
+        let resolution = {
+            if let entry = self.getEntry(for: key) {
+                resolvedInstance = self.resolve(entry: entry, invoker: invoker)
+            }
+            
+            if resolvedInstance == nil {
+                resolvedInstance = self.resolveAsWrapper(name: name, option: option, invoker: invoker)
+            }
+            
+            if resolvedInstance == nil {
+                self.debugHelper.resolutionFailed(
+                    serviceType: Service.self,
+                    key: key,
+                    availableRegistrations: self.getRegistrations()
+                )
+            }
         }
-
-        if resolvedInstance == nil {
-            resolvedInstance = resolveAsWrapper(name: name, option: option, invoker: invoker)
-        }
-
-        if resolvedInstance == nil {
-            debugHelper.resolutionFailed(
-                serviceType: Service.self,
-                key: key,
-                availableRegistrations: getRegistrations()
-            )
+        
+        if threadSafeResolutionEnabled {
+            lock.sync(action: resolution)
+        } else {
+            resolution()
         }
 
         return resolvedInstance

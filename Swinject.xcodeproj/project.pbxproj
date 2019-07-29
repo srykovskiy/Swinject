@@ -24,6 +24,9 @@
 		90B0298B1C186D5300A6A521 /* LoadAwareAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0298A1C186D5300A6A521 /* LoadAwareAssembly.swift */; };
 		90B0298C1C186D5300A6A521 /* LoadAwareAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0298A1C186D5300A6A521 /* LoadAwareAssembly.swift */; };
 		90B0298D1C186D5300A6A521 /* LoadAwareAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B0298A1C186D5300A6A521 /* LoadAwareAssembly.swift */; };
+		9596D1B722EF18FF007890DA /* ContainerSpec.ThreadSafeResolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9596D1B622EF18FF007890DA /* ContainerSpec.ThreadSafeResolution.swift */; };
+		9596D1B822EF18FF007890DA /* ContainerSpec.ThreadSafeResolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9596D1B622EF18FF007890DA /* ContainerSpec.ThreadSafeResolution.swift */; };
+		9596D1B922EF18FF007890DA /* ContainerSpec.ThreadSafeResolution.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9596D1B622EF18FF007890DA /* ContainerSpec.ThreadSafeResolution.swift */; };
 		981577F11B675B7F00BF686B /* Circularity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981577F01B675B7F00BF686B /* Circularity.swift */; };
 		981577F21B675B7F00BF686B /* Circularity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 981577F01B675B7F00BF686B /* Circularity.swift */; };
 		981899C61B5FE63F00C702D0 /* Swinject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 981899BC1B5FE63F00C702D0 /* Swinject.framework */; };
@@ -255,6 +258,7 @@
 		90B0297E1C18666200A6A521 /* AssemblerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssemblerSpec.swift; sourceTree = "<group>"; };
 		90B029821C18670000A6A521 /* BasicAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BasicAssembly.swift; sourceTree = "<group>"; };
 		90B0298A1C186D5300A6A521 /* LoadAwareAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LoadAwareAssembly.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		9596D1B622EF18FF007890DA /* ContainerSpec.ThreadSafeResolution.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerSpec.ThreadSafeResolution.swift; sourceTree = "<group>"; };
 		981577F01B675B7F00BF686B /* Circularity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circularity.swift; sourceTree = "<group>"; };
 		981899BC1B5FE63F00C702D0 /* Swinject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Swinject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		981899C51B5FE63F00C702D0 /* SwinjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwinjectTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -500,6 +504,7 @@
 				CDC4FCF820502A9A0021C60F /* LazySpec.swift */,
 				CD5E9A31205157E3009090F9 /* ContainerSpec.GraphCaching.swift */,
 				CD8E362B20595ACD00F2A5CF /* ProviderSpec.swift */,
+				9596D1B622EF18FF007890DA /* ContainerSpec.ThreadSafeResolution.swift */,
 			);
 			name = SwinjectTests;
 			path = Tests/SwinjectTests;
@@ -835,6 +840,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 981ABE771B5FC9DF00294975;
@@ -970,6 +976,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9596D1B822EF18FF007890DA /* ContainerSpec.ThreadSafeResolution.swift in Sources */,
 				90B029841C18670000A6A521 /* BasicAssembly.swift in Sources */,
 				9855C5C61B689B7B00DADB0B /* Food.swift in Sources */,
 				9855C5C91B689D9000DADB0B /* ServiceEntrySpec.swift in Sources */,
@@ -1031,6 +1038,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9596D1B722EF18FF007890DA /* ContainerSpec.ThreadSafeResolution.swift in Sources */,
 				9855C5C51B689B7B00DADB0B /* Food.swift in Sources */,
 				9855C5C81B689D9000DADB0B /* ServiceEntrySpec.swift in Sources */,
 				9878C63C1B65CA8700CBEFEF /* Person.swift in Sources */,
@@ -1120,6 +1128,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9596D1B922EF18FF007890DA /* ContainerSpec.ThreadSafeResolution.swift in Sources */,
 				98689CBB1BBFD5110005C6D3 /* ContainerSpec.Arguments.swift in Sources */,
 				98689CBE1BBFD5110005C6D3 /* ServiceEntrySpec.swift in Sources */,
 				98689CBC1BBFD5110005C6D3 /* ContainerSpec.Circularity.swift in Sources */,
